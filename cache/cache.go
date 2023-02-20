@@ -1,5 +1,10 @@
 package cache
 
+import (
+	"log"
+	"os"
+)
+
 type FlushOperation string
 
 const (
@@ -25,5 +30,8 @@ func New(flush_size int, directory string) MemoryFirstCache {
 	mfc := MemoryFirstCache{
 		flush_size, directory, m, c,
 	}
+    err := os.Mkdir(directory, 0777)
+    if err != nil {
+        log.Fatal(err)}
 	return mfc
 }
